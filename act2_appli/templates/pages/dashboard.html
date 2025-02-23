@@ -1,0 +1,49 @@
+{% extends "pages/base.html" %}
+{% load static %}
+{% load custom_filters %}  {# Load custom filter for formatting #}
+
+{% block content %}
+    <h2>Dashboard Overview</h2>
+
+    <style>
+        .dashboard-wrapper {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        .dashboard-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            width: 190px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .dashboard-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.15);
+        }
+        .dashboard-item h3 {
+            margin: 5px 0;
+            font-size: 1.2rem;
+            color: #222;
+        }
+        .dashboard-item p {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #0066cc;
+        }
+    </style>
+
+    <div class="dashboard-wrapper">
+        {% for record in data %}
+        <div class="dashboard-item">
+            <h3>{{ record.title }}</h3>
+            <p>{{ record.count|currency_format }}</p>  {# Using custom filter for formatting #}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
